@@ -1,16 +1,14 @@
-﻿namespace UC7
+﻿namespace UC8
 {
-    class UC7_RefractingTheCode
+    class UC8_WageforMultipleCompanies
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
-        public const int EMP_RATE_PER_HOUR = 20;
-        public const int NUM_OF_WORKING_DAYS = 20;
-        public const int MAX_HRS_IN_MONTH = 100;
-        public static int computeEmpWage()
+
+        public static int computeEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
         {
             int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-            while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
+            while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
             {
                 totalWorkingDays++;
                 Random random = new Random();
@@ -29,15 +27,17 @@
 
                 }
                 totalEmpHrs += empCheck;
-                Console.WriteLine("Day:" + totalWorkingDays + "Emp Hrs :" + empHrs);
+                Console.WriteLine("Day#:" + totalWorkingDays + "Emp Hrs :" + empHrs);
             }
-            int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-            Console.WriteLine("Total Emp Wage : " + totalEmpWage);
+            int totalEmpWage = totalEmpHrs * empRatePerHour;
+            Console.WriteLine("Total Emp Wage for company : " + company + "is:" + totalEmpWage);
             return totalEmpWage;
         }
         static void Main(string[] args)
         {
-            computeEmpWage();
+            computeEmpWage("DMart", 20, 2, 10);
+            computeEmpWage("Reliance", 10, 4, 20);
+            computeEmpWage("Apple", 24, 10, 30);
         }
     }
 }
