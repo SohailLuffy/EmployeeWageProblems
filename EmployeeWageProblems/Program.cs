@@ -1,43 +1,65 @@
-﻿namespace UC8
-{
-    class UC8_WageforMultipleCompanies
-    {
-        public const int IS_PART_TIME = 1;
-        public const int IS_FULL_TIME = 2;
+﻿using System;
+using System.Collections.Generic;
 
-        public static int computeEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+namespace UC9
+{
+    public class CalCu
+    {
+        String company;
+        int emprateperhr;
+        int noofworkingdays;
+        int maxhrinmonth;
+        public CalCu(String company, int emprateperhr, int noofworkingdays, int maxhrinmonth)
         {
-            int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-            while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
+            this.company = company;
+            this.emprateperhr = emprateperhr;
+            this.noofworkingdays = noofworkingdays;
+            this.maxhrinmonth = maxhrinmonth;
+        }
+
+        public void calempwage()
+        {
+            const int IS_PART_TIME = 1;
+            const int IS_FULL_TIME = 2;
+            int totalwage = 0;
+            int emphr = 0;
+            int totalemphr = 0;
+            int workingdays = 0;
+
+            while (totalemphr <= maxhrinmonth && workingdays < noofworkingdays)
             {
-                totalWorkingDays++;
-                Random random = new Random();
-                int empCheck = random.Next(0, 3);
-                switch (empCheck)
+                workingdays++;
+                Random ran = new Random();
+                int empcheck = ran.Next(0, 3);
+                switch (empcheck)
                 {
-                    case IS_PART_TIME:
-                        empHrs = 8;
-                        break;
                     case IS_FULL_TIME:
-                        empHrs = 12;
+                        emphr = 8;
+                        break;
+                    case IS_PART_TIME:
+                        emphr = 4;
                         break;
                     default:
-                        empHrs = 0;
+                        emphr = 0;
                         break;
-
                 }
-                totalEmpHrs += empCheck;
-                Console.WriteLine("Day#:" + totalWorkingDays + "Emp Hrs :" + empHrs);
+                totalemphr += emphr;
+                Console.WriteLine("Days:" + workingdays + "  Emp Hours:" + totalemphr);
             }
-            int totalEmpWage = totalEmpHrs * empRatePerHour;
-            Console.WriteLine("Total Emp Wage for company : " + company + "is:" + totalEmpWage);
-            return totalEmpWage;
+            totalwage = totalemphr * emprateperhr;
+            Console.WriteLine("Total Wage For Company:" + company + " is " + totalwage);
         }
+
+    }
+    internal class UC9
+    {
         static void Main(string[] args)
         {
-            computeEmpWage("DMart", 20, 2, 10);
-            computeEmpWage("Reliance", 10, 4, 20);
-            computeEmpWage("Apple", 24, 10, 30);
+            CalCu ob1 = new CalCu("Wipro", 230, 26, 208);
+            ob1.calempwage();
+            Console.WriteLine("----------------------------------------------------------------------------------------");
+            CalCu ob2 = new CalCu("Infosys", 240, 27, 216);
+            ob2.calempwage();
         }
     }
 }
